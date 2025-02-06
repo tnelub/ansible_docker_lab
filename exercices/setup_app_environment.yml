@@ -5,9 +5,10 @@
   tasks:
     - name: Create directory app_data
       ansible.builtin.file:
-        path: /app_data
+        path: "{{ item }}"
         state: directory
         mode: '0755'
+      loop: "{{ rep }}"
     - name: Create a group app_group
       ansible.builtin.group:
         name: app_group
@@ -16,12 +17,13 @@
       ansible.builtin.user:
         name: app_user
         state: present
-        home: /home/app_user
+        home: "/home/app_user"
         shell: /bin/bash
         group: app_group
-    - name: Create directory app_data
+    - name: Change directory
       ansible.builtin.file:
-        path: /app_data
+        path: "{{ item }}"
         mode: '0744'
         owner: app_user
         group: app_group
+      loop: "{{ rep }}"
