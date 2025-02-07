@@ -1,0 +1,3 @@
+---
+- src: https://github.com/BAliani/packages-install.git
+  scm: git
